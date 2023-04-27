@@ -1,0 +1,24 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: 'A sample template'
+
+
+Resources:  
+  s3bucket: 
+    Type: AWS::S3::Bucket
+    Properties: 
+      BucketName: s3-bucketsahil1234
+
+  S3BUCKETPOLICY:
+          Type: AWS::S3::BucketPolicy
+          Properties: 
+            Bucket: !Ref s3bucket
+            PolicyDocument:
+              Id: Mypolicy
+              Version: "2012-10-17"
+              Statement:
+                - Sid: myfistjob
+                  Action: "s3:ListBucket"
+                  Effect: Allow
+                  Resource: !Sub 'arn:aws:s3:::${s3bucket}'
+                  Principal:
+                    AWS: !Join ['', ["arn:aws:iam::", 505615412164, ":root"]]  
